@@ -58,7 +58,7 @@ export const deleteStream = (streamId) => async (dispatch) => {
 };
 
 export const editStream = (streamId, formValues) => async (dispatch) => {
-	const response = await await streamsApi.put(
+	const response = await await streamsApi.patch(
 		`/streams/${streamId}`,
 		formValues
 	);
@@ -66,4 +66,5 @@ export const editStream = (streamId, formValues) => async (dispatch) => {
 		type: EDIT_STREAM,
 		payload: response.data,
 	});
+	history.push('/');
 };

@@ -15,7 +15,14 @@ class StreamList extends Component {
 					<Link to={`/streams/edit/${stream.id}`} className="ui button primary">
 						Edit
 					</Link>
-					{/* <Link className="ui button negative">Delete</Link> */}
+					{
+						<Link
+							to={`/streams/delete/${stream.id}`}
+							className="ui button negative"
+						>
+							Delete
+						</Link>
+					}
 				</div>
 			);
 		}
@@ -29,7 +36,7 @@ class StreamList extends Component {
 					{this.renderAdmin(stream)}
 					<i className="large camera middle aligned icon"></i>
 					<div className="content">
-						<a className="header" href="#">
+						<a className="header" href={`/streams/edit/${stream.id}`}>
 							{stream.title}
 						</a>
 						<div className="description">{stream.description}</div>
