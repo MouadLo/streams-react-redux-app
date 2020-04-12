@@ -14,23 +14,21 @@ class StreamCreate extends Component {
 		}
 	}
 
-	renderInput = (formProps) => {
-		const className = `field ${
-			formProps.meta.error && formProps.meta.touched ? 'error' : ''
-		}`;
+	renderInput = ({ label, input, meta }) => {
+		const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
 		return (
 			<div className={className}>
-				<label>{formProps.label}</label>
-				<input {...formProps.input} autoComplete="off" />
+				<label>{label}</label>
+				<input {...input} autoComplete="off" />
 
-				{this.renderError(formProps.meta)}
+				{this.renderError(meta)}
 			</div>
 		);
 	};
 
-	onSubmit(formValues) {
-		console.log(formValues);
-	}
+	onSubmit = (formValues) => {
+		this.props.createStream(formValues);
+	};
 
 	render() {
 		return (
@@ -61,7 +59,9 @@ const validate = (formValues) => {
 	return errors;
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
 	form: 'streamCreate',
 	validate,
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);
